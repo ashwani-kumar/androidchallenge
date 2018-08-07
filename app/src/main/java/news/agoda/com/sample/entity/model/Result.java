@@ -26,7 +26,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "created_date",
     "published_date",
     "material_type_facet",
-    "kicker"
+    "kicker",
+    "multimedia"
 })
 public class Result {
 
@@ -54,7 +55,8 @@ public class Result {
     private String materialTypeFacet;
     @JsonProperty("kicker")
     private String kicker;
-
+    @JsonProperty("multimedia")
+    private List<MultiMediumEntity> multimedia = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -176,6 +178,16 @@ public class Result {
     @JsonProperty("kicker")
     public void setKicker(String kicker) {
         this.kicker = kicker;
+    }
+
+    @JsonProperty("multimedia")
+    public List<MultiMediumEntity> getMultimedia() {
+        return multimedia;
+    }
+
+    @JsonProperty("multimedia")
+    public void setMultimedia(List<MultiMediumEntity> multimedia) {
+        this.multimedia = multimedia;
     }
 
     @JsonAnyGetter

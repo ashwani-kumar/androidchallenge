@@ -1,6 +1,8 @@
 package news.agoda.com.sample.domain.mapper;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONArray;
@@ -57,7 +59,9 @@ public class NewsFeedEntityDomainMapper {
         List<NewsEntity> newsItemList = new ArrayList<>();
         NewsEntity newsEntity;
         try {
-            newsEntity = new ObjectMapper().readValue(content, NewsEntity.class);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+            newsEntity = mapper.readValue(content, NewsEntity.class);
             newsItemList.add(newsEntity);
         } catch (IOException e) {
             System.out.print("Fail to parse json string = " + e);
