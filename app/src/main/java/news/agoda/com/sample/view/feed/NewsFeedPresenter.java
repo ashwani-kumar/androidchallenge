@@ -43,8 +43,8 @@ public class NewsFeedPresenter {
             public void accept(ResponseBody newsEntity) throws Exception {
                 if (newsFeedView != null) {
                     newsFeedView.hideProgress();
-                    newsFeedEntityDomainMapper.parseResponse(newsEntity.string());
-                    //newsFeedView.newsFeedResponse(newsFeedEntityDomainMapper.mapResults(newsEntity));
+                    NewsEntity parsedNewsEntity = newsFeedEntityDomainMapper.parseResponse(newsEntity.string());
+                    newsFeedView.newsFeedResponse(newsFeedEntityDomainMapper.mapResults(parsedNewsEntity.getResults()));
                 }
             }
         }, new Consumer<Throwable>() {

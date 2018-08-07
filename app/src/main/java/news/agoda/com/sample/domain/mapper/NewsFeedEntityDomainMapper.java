@@ -30,8 +30,8 @@ public class NewsFeedEntityDomainMapper {
                 resultDomain.setTitle(resultEntity.getTitle());
                 resultDomain.setAbstract(resultEntity.getAbstract());
                 resultDomain.setPublishedDate(resultEntity.getPublishedDate());
-                //List<MultiMediumDomain> mediumDomain = mapMedia(resultEntity.getMultimedia());
-                //resultDomain.setMultimedia(mediumDomain);
+                List<MultiMediumDomain> mediumDomain = mapMedia(resultEntity.getMultimedia());
+                resultDomain.setMultimedia(mediumDomain);
                 resultDomainList.add(resultDomain);
             }
         }
@@ -55,17 +55,17 @@ public class NewsFeedEntityDomainMapper {
         return mediumDomains;
     }
 
-    public List<NewsEntity> parseResponse(String content) {
-        List<NewsEntity> newsItemList = new ArrayList<>();
+    public NewsEntity parseResponse(String content) {
+        NewsEntity newsItem = new NewsEntity();
         NewsEntity newsEntity;
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
             newsEntity = mapper.readValue(content, NewsEntity.class);
-            newsItemList.add(newsEntity);
+            newsItem = newsEntity;
         } catch (IOException e) {
             System.out.print("Fail to parse json string = " + e);
         }
-        return newsItemList;
+        return newsItem;
     }
 }
