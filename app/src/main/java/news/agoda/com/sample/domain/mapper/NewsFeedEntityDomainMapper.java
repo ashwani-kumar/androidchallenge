@@ -24,7 +24,7 @@ public class NewsFeedEntityDomainMapper {
 
     public List<ResultDomain> mapResults(List<Result> results) {
         List<ResultDomain> resultDomainList = new ArrayList<>();
-        if (results != null || results.size() > 0) {
+        if (results != null && results.size() > 0) {
             for (Result resultEntity : results) {
                 ResultDomain resultDomain = new ResultDomain();
                 resultDomain.setTitle(resultEntity.getTitle());
@@ -40,7 +40,7 @@ public class NewsFeedEntityDomainMapper {
 
     private List<MultiMediumDomain> mapMedia(List<MultiMediumEntity> media) {
         List<MultiMediumDomain> mediumDomains = new ArrayList<>();
-        if (media != null || media.size() > 0) {
+        if (media != null && media.size() > 0) {
             for (MultiMediumEntity mediaEntity : media) {
                 MultiMediumDomain mediumDomain = new MultiMediumDomain();
                 mediumDomain.setUrl(mediaEntity.getUrl());
