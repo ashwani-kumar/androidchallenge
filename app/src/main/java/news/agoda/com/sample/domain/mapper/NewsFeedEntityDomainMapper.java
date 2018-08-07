@@ -54,25 +54,14 @@ public class NewsFeedEntityDomainMapper {
     }
 
     public List<NewsEntity> parseResponse(String content) {
-            List<NewsEntity> newsItemList = new ArrayList<>();
-            JSONObject jsonObject;
-
-            try {
-                jsonObject = new JSONObject(content);
-                ObjectMapper objectMapper = new ObjectMapper();
-                Map<String, Object> jsonMap = objectMapper.readValue(content,
-                        new TypeReference<Object>(){});
-                JSONArray resultArray = jsonObject.getJSONArray("results");
-                for (int i = 0; i < resultArray.length(); i++) {
-                    JSONObject newsObject = resultArray.getJSONObject(i);
-                    NewsEntity newsEntity = new NewsEntity(newsObject);
-                    newsItemList.add(newsEntity);
-                }
-            } catch (JSONException e) {
-                System.out.print("Fail to parse json string = "+e);
-            }catch (IOException e) {
-                System.out.print("Fail to parse json string = "+e);
-            }
-            return newsItemList;
+        List<NewsEntity> newsItemList = new ArrayList<>();
+        NewsEntity newsEntity;
+        try {
+            newsEntity = new ObjectMapper().readValue(content, NewsEntity.class);
+            newsItemList.add(newsEntity);
+        } catch (IOException e) {
+            System.out.print("Fail to parse json string = " + e);
+        }
+        return newsItemList;
     }
 }

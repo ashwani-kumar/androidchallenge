@@ -7,11 +7,13 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
     "section",
     "subsection",
@@ -24,8 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "created_date",
     "published_date",
     "material_type_facet",
-    "kicker",
-    "multimedia"
+    "kicker"
 })
 public class Result {
 
@@ -53,8 +54,7 @@ public class Result {
     private String materialTypeFacet;
     @JsonProperty("kicker")
     private String kicker;
-    @JsonProperty("multimedia")
-    private List<MultiMediumEntity> multimedia = null;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -176,16 +176,6 @@ public class Result {
     @JsonProperty("kicker")
     public void setKicker(String kicker) {
         this.kicker = kicker;
-    }
-
-    @JsonProperty("multimedia")
-    public List<MultiMediumEntity> getMultimedia() {
-        return multimedia;
-    }
-
-    @JsonProperty("multimedia")
-    public void setMultimedia(List<MultiMediumEntity> multimedia) {
-        this.multimedia = multimedia;
     }
 
     @JsonAnyGetter
