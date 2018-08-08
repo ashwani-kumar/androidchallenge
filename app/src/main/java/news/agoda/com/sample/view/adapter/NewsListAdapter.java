@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import news.agoda.com.sample.R;
+import news.agoda.com.sample.domain.model.MultiMediumDomain;
 import news.agoda.com.sample.domain.model.NewsDomain;
 import news.agoda.com.sample.domain.model.ResultDomain;
 
@@ -49,16 +50,24 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
         ResultDomain mediaEntity = mNewsFeedResults.get(position);
-        String thumbnailURL = "";
-        thumbnailURL = mediaEntity.getUrl();
-        Uri uri = Uri.parse(thumbnailURL);
         viewHolder.newsTitle.setText(mediaEntity.getTitle());
-        viewHolder.imageView.setImageURI(uri);
+        List<MultiMediumDomain> multiMediumDomains = mediaEntity.getMultimedia();
+        if(multiMediumDomains != null && multiMediumDomains.size() > 0) {
+            String thumbnailURL = "";
+            thumbnailURL = multiMediumDomains.get(0).getUrl();
+            Uri uri = Uri.parse(thumbnailURL);
+            viewHolder.imageView.setImageURI(uri);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mNewsFeedResults != null ? mNewsFeedResults.size() : 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

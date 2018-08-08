@@ -2,6 +2,8 @@ package news.agoda.com.sample.di.module;
 
 import android.content.Context;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 import news.agoda.com.sample.di.scope.MainActivityScope;
@@ -9,28 +11,27 @@ import news.agoda.com.sample.domain.mapper.NewsFeedEntityDomainMapper;
 import news.agoda.com.sample.domain.usecase.NewsFeedRepository;
 import news.agoda.com.sample.network.APIInterface;
 import news.agoda.com.sample.view.adapter.NewsListAdapter;
-import news.agoda.com.sample.view.feed.NewsFeedActivity;
-import news.agoda.com.sample.view.feed.NewsFeedPresenter;
-import news.agoda.com.sample.view.feed.NewsFeedView;
+import news.agoda.com.sample.view.feed.fragment.NewsFeedFragment;
+import news.agoda.com.sample.view.feed.fragment.NewsFeedFragmentPresenter;
 
-@Module
-public class NewsFeedActivityModule {
-    private final NewsFeedActivity newsFeedActivity;
+@Module(includes = ActivityModule.class)
+public class NewsFeedFragmentModule {
+    private final NewsFeedFragment newsFeedFragment;
 
-    public NewsFeedActivityModule(NewsFeedActivity newsFeedActivity) {
-        this.newsFeedActivity = newsFeedActivity;
+    public NewsFeedFragmentModule(NewsFeedFragment newsFeedActivity) {
+        this.newsFeedFragment = newsFeedActivity;
     }
 
     @Provides
     @MainActivityScope
-    public NewsListAdapter newsFeedAdapter() {
-        return new NewsListAdapter(newsFeedActivity);
+    public NewsListAdapter newsFeedAdapter(@Named("activity_context") Context context) {
+        return new NewsListAdapter(context);
     }
 
     @Provides
     @MainActivityScope
-    public NewsFeedPresenter newsFeedPresenter(NewsFeedRepository newsFeedRepository, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
-        return new NewsFeedPresenter(newsFeedActivity, newsFeedRepository, newsFeedEntityDomainMapper);
+    public NewsFeedFragmentPresenter newsFeedPresenter(NewsFeedRepository newsFeedRepository, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
+        return new NewsFeedFragmentPresenter(newsFeedFragment, newsFeedRepository, newsFeedEntityDomainMapper);
     }
 
     @Provides

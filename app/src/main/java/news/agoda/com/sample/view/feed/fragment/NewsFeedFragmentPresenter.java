@@ -1,34 +1,28 @@
-package news.agoda.com.sample.view.feed;
+package news.agoda.com.sample.view.feed.fragment;
 
-import android.support.annotation.NonNull;
+import android.support.v4.app.ListFragment;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import news.agoda.com.sample.domain.mapper.NewsFeedEntityDomainMapper;
-import news.agoda.com.sample.entity.model.NewsEntity;
 import news.agoda.com.sample.domain.usecase.NewsFeedInteractor;
 import news.agoda.com.sample.domain.usecase.NewsFeedInteractorImpl;
 import news.agoda.com.sample.domain.usecase.NewsFeedRepository;
+import news.agoda.com.sample.entity.model.NewsEntity;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class NewsFeedPresenter {
-    private NewsFeedView newsFeedView;
+public class NewsFeedFragmentPresenter {
+
+    private NewsFeedFragment newsFeedView;
     private NewsFeedRepository newsFeedRepository;
     private NewsFeedEntityDomainMapper newsFeedEntityDomainMapper;
 
     @Inject
-    public NewsFeedPresenter(NewsFeedView newsFeedView, NewsFeedRepository newsFeedRepository, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
-        this.newsFeedView = newsFeedView;
+    public NewsFeedFragmentPresenter(NewsFeedFragment newsFeedFragment, NewsFeedRepository newsFeedRepository, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
+        this.newsFeedView = newsFeedFragment;
         this.newsFeedRepository = newsFeedRepository;
         this.newsFeedEntityDomainMapper = newsFeedEntityDomainMapper;
     }
@@ -54,9 +48,5 @@ public class NewsFeedPresenter {
                 newsFeedView.showError(throwable.getMessage());
             }
         });
-
     }
-
-
-
 }

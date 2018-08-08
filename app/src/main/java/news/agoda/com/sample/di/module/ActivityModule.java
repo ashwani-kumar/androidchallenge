@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import news.agoda.com.sample.di.scope.MainActivityScope;
 import news.agoda.com.sample.di.scope.NewsFeedApplicationScope;
 
 @Module
@@ -18,7 +19,7 @@ public class ActivityModule {
     }
 
     @Named("activity_context")
-    @NewsFeedApplicationScope
+    @MainActivityScope
     @Provides
     public Context context(){
         return this.context;

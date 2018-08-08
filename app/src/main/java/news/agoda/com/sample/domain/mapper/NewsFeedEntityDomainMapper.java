@@ -28,6 +28,7 @@ public class NewsFeedEntityDomainMapper {
             for (Result resultEntity : results) {
                 ResultDomain resultDomain = new ResultDomain();
                 resultDomain.setTitle(resultEntity.getTitle());
+                resultDomain.setUrl(resultEntity.getUrl());
                 resultDomain.setAbstract(resultEntity.getAbstract());
                 resultDomain.setPublishedDate(resultEntity.getPublishedDate());
                 List<MultiMediumDomain> mediumDomain = mapMedia(resultEntity.getMultimedia());
