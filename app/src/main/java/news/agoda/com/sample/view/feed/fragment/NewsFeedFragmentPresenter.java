@@ -1,7 +1,5 @@
 package news.agoda.com.sample.view.feed.fragment;
 
-import android.support.v4.app.ListFragment;
-
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -16,20 +14,19 @@ import okhttp3.ResponseBody;
 
 public class NewsFeedFragmentPresenter {
 
-    private NewsFeedFragment newsFeedView;
-    private NewsFeedRepository newsFeedRepository;
+    private NewsFeedFragView newsFeedView;
+    private NewsFeedInteractorImpl newsFeedInteractor;
     private NewsFeedEntityDomainMapper newsFeedEntityDomainMapper;
 
     @Inject
-    public NewsFeedFragmentPresenter(NewsFeedFragment newsFeedFragment, NewsFeedRepository newsFeedRepository, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
+    public NewsFeedFragmentPresenter(NewsFeedFragView newsFeedFragment, NewsFeedInteractorImpl newsFeedInteractor, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
         this.newsFeedView = newsFeedFragment;
-        this.newsFeedRepository = newsFeedRepository;
+        this.newsFeedInteractor = newsFeedInteractor;
         this.newsFeedEntityDomainMapper = newsFeedEntityDomainMapper;
     }
 
     public void getNewsFeeds() {
         newsFeedView.showProgress();
-        NewsFeedInteractor newsFeedInteractor = new NewsFeedInteractorImpl(newsFeedRepository);
         newsFeedInteractor.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ResponseBody>() {

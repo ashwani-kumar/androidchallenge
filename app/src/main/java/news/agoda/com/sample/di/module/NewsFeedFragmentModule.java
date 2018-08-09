@@ -8,6 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 import news.agoda.com.sample.di.scope.MainActivityScope;
 import news.agoda.com.sample.domain.mapper.NewsFeedEntityDomainMapper;
+import news.agoda.com.sample.domain.usecase.NewsFeedInteractorImpl;
 import news.agoda.com.sample.domain.usecase.NewsFeedRepository;
 import news.agoda.com.sample.network.APIInterface;
 import news.agoda.com.sample.view.adapter.NewsListAdapter;
@@ -30,8 +31,14 @@ public class NewsFeedFragmentModule {
 
     @Provides
     @MainActivityScope
-    public NewsFeedFragmentPresenter newsFeedPresenter(NewsFeedRepository newsFeedRepository, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
-        return new NewsFeedFragmentPresenter(newsFeedFragment, newsFeedRepository, newsFeedEntityDomainMapper);
+    public NewsFeedFragmentPresenter newsFeedPresenter(NewsFeedInteractorImpl newsFeedInteractor, NewsFeedEntityDomainMapper newsFeedEntityDomainMapper) {
+        return new NewsFeedFragmentPresenter(newsFeedFragment, newsFeedInteractor, newsFeedEntityDomainMapper);
+    }
+
+    @Provides
+    @MainActivityScope
+    public NewsFeedInteractorImpl newsFeedInteractor(NewsFeedRepository newsFeedRepository){
+        return new NewsFeedInteractorImpl(newsFeedRepository);
     }
 
     @Provides

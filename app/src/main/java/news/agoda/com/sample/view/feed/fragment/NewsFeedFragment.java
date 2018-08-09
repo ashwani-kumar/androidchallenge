@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,11 +35,7 @@ import news.agoda.com.sample.view.adapter.NewsListAdapter;
 
 public class NewsFeedFragment extends Fragment implements NewsFeedFragView, NewsFeedClickListener{
 
-    private static final String STATE_ACTIVATED_POSITION = "activated_position";
-
     private Callbacks mCallbacks = sDummyCallbacks;
-
-    private int mActivatedPosition = ListView.INVALID_POSITION;
 
     public interface Callbacks {
         void onItemSelected(ResultDomain id);
@@ -59,19 +54,12 @@ public class NewsFeedFragment extends Fragment implements NewsFeedFragView, News
     @Named("activity_context")
     Context context;
 
-    /**
-     * A dummy implementation of the {@link Callbacks} interface that does
-     * nothing. Used only when this fragment is not attached to an activity.
-     */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
         public void onItemSelected(ResultDomain id) {
         }
     };
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon screen orientation changes).
-    */
     public NewsFeedFragment() {
     }
 
@@ -87,7 +75,7 @@ public class NewsFeedFragment extends Fragment implements NewsFeedFragView, News
         NewFeedActivityComponent mainActivityComponent = DaggerNewFeedActivityComponent.builder()
                 .activityModule(new ActivityModule(getActivity()))
                 .newsFeedFragmentModule(new NewsFeedFragmentModule(this))
-                .newsFeedComponent(NewsFeedApplication.get(getActivity()).getRandomUserApplicationComponent())
+                .newsFeedComponent(NewsFeedApplication.get(getActivity()).getNewFeedApplicationComponent())
                 .build();
         mainActivityComponent.injectNewsFeedFragment(this);
         if(PermissionUtils.checkInternetPermission(getContext())) {
@@ -101,7 +89,6 @@ public class NewsFeedFragment extends Fragment implements NewsFeedFragView, News
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Activities containing this fragment must implement its callbacks.
         if (!(activity instanceof Callbacks)) {
             throw new IllegalStateException("Activity must implement fragment's callbacks.");
         }
@@ -111,7 +98,6 @@ public class NewsFeedFragment extends Fragment implements NewsFeedFragView, News
     @Override
     public void onDetach() {
         super.onDetach();
-        // Reset the active callbacks interface to the dummy implementation.
         mCallbacks = sDummyCallbacks;
     }
 

@@ -39,7 +39,7 @@ public class NewsFeedEntityDomainMapper {
         return resultDomainList;
     }
 
-    private List<MultiMediumDomain> mapMedia(List<MultiMediumEntity> media) {
+    public List<MultiMediumDomain> mapMedia(List<MultiMediumEntity> media) {
         List<MultiMediumDomain> mediumDomains = new ArrayList<>();
         if (media != null && media.size() > 0) {
             for (MultiMediumEntity mediaEntity : media) {
@@ -58,14 +58,16 @@ public class NewsFeedEntityDomainMapper {
 
     public NewsEntity parseResponse(String content) {
         NewsEntity newsItem = new NewsEntity();
-        NewsEntity newsEntity;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-            newsEntity = mapper.readValue(content, NewsEntity.class);
-            newsItem = newsEntity;
-        } catch (IOException e) {
-            System.out.print("Fail to parse json string = " + e);
+        if(content!=null) {
+            NewsEntity newsEntity;
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+                newsEntity = mapper.readValue(content, NewsEntity.class);
+                newsItem = newsEntity;
+            } catch (IOException e) {
+                System.out.print("Fail to parse json string = " + e);
+            }
         }
         return newsItem;
     }

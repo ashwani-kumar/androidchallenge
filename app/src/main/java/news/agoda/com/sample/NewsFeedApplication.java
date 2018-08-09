@@ -25,7 +25,7 @@ public class NewsFeedApplication extends Application {
                 .build();
     }
 
-    public NewsFeedComponent getRandomUserApplicationComponent(){
+    public NewsFeedComponent getNewFeedApplicationComponent(){
         return newsFeedComponent;
     }
 }

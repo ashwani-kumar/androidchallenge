@@ -11,11 +11,8 @@ import news.agoda.com.sample.view.detail.NewsDetailActivity;
 import news.agoda.com.sample.view.detail.fragment.NewsDetailFragment;
 import news.agoda.com.sample.view.feed.fragment.NewsFeedFragment;
 
-@Component(modules = {NewsFeedFragmentModule.class, ActivityModule.class}, dependencies = NewsFeedComponent.class)
+@Component(modules = {NewsDetailFragmentModule.class}, dependencies = NewsFeedComponent.class)
 @MainActivityScope
-public interface NewFeedActivityComponent {
-    NewsListAdapter getNewsFeedAdapter();
-    APIInterface getApiClient();
-    void injectNewsDetailActivity(NewsDetailActivity newsDetailActivity);
-    void injectNewsFeedFragment(NewsFeedFragment newsFeedFragment);
+public interface NewDetailActivityComponent {
+    void injectNewsDetailFragment(NewsDetailFragment newsDetailFragment);
 }
