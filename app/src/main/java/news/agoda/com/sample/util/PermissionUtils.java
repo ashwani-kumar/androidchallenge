@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat;
 
 public class PermissionUtils {
 
-    public static final int REQUEST_PERMISSION_INTERNET = 100;
+    private static final int REQUEST_PERMISSION_INTERNET = 100;
 
     public static boolean checkInternetPermission(final Context context) {
         int currentAPIVersion = Build.VERSION.SDK_INT;

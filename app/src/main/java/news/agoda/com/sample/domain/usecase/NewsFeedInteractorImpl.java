@@ -5,7 +5,7 @@ import news.agoda.com.sample.entity.model.NewsEntity;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
-public class NewsFeedInteractorImpl extends AbstractInteractor implements NewsFeedInteractor{
+public class NewsFeedInteractorImpl extends AbstractInteractor{
     private FeedRepository mFeedRepository;
 
     public NewsFeedInteractorImpl(FeedRepository feedRepository) {

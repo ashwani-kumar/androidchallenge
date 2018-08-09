@@ -24,38 +24,38 @@ public class NewsEntityTest {
     }
 
     @Test
-    public void validateStoryUrl() throws Exception {
+    public void validateStoryUrl() {
         Assert.assertEquals(parsedNewsEntity.getResults().get(0).getUrl(), storyUrl);
     }
 
     @Test
-    public void validateStatus() throws Exception {
+    public void validateStatus() {
         Assert.assertEquals(parsedNewsEntity.getStatus(), "OK");
     }
 
     @Test
-    public void validateSResultSize() throws Exception {
+    public void validateSResultSize() {
         Assert.assertEquals(parsedNewsEntity.getResults().size(), 4);
     }
 
     @Test
-    public void validateSection() throws Exception {
+    public void validateSection() {
         Assert.assertEquals(parsedNewsEntity.getSection(), "technology");
     }
 
     @Test
-    public void validateLastUpdated() throws Exception {
+    public void validateLastUpdated() {
         Assert.assertEquals(parsedNewsEntity.getLastUpdated(), "2015-08-18T10:15:06-05:00");
     }
 
     @Test
-    public void validateEmptySection() throws Exception {
+    public void validateEmptySection() {
         parsedNewsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponseEmptyProperties);
         Assert.assertEquals(parsedNewsEntity.getSection(), "");
     }
 
     @Test
-    public void validateEmptyLastUdated() throws Exception {
+    public void validateEmptyLastUdated() {
         parsedNewsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponseEmptyProperties);
         Assert.assertEquals(parsedNewsEntity.getLastUpdated(), "");
     }

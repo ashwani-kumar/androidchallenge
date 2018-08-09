@@ -11,7 +11,7 @@ public class AppUtils {
         String url = null;
         if (result != null) {
             List<MultiMediumDomain> media = result.getMultimedia();
-            if (media != null || !media.isEmpty()) {
+            if (media != null && !media.isEmpty()) {
                 for(MultiMediumDomain multiMediumDomain : media){
                     if(multiMediumDomain.getFormat().equals(ApplicationConstants.BUNDLE_CONSTANT_TITLE_IMAGE_FORMAT_NORMAL)){
                         url = multiMediumDomain.getUrl();

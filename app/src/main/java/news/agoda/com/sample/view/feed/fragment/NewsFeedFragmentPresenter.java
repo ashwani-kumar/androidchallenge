@@ -6,9 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import news.agoda.com.sample.domain.mapper.NewsFeedEntityDomainMapper;
-import news.agoda.com.sample.domain.usecase.NewsFeedInteractor;
 import news.agoda.com.sample.domain.usecase.NewsFeedInteractorImpl;
-import news.agoda.com.sample.domain.usecase.NewsFeedRepository;
 import news.agoda.com.sample.entity.model.NewsEntity;
 import okhttp3.ResponseBody;
 

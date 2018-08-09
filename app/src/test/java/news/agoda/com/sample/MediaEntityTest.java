@@ -24,37 +24,31 @@ public class MediaEntityTest {
     }
 
     @Test
-    public void validateImageUrl() throws Exception {
+    public void validateImageUrl() {
         NewsEntity newsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponse);
         List<MultiMediumDomain> multiMediumDomains = newsFeedEntityDomainMapper.mapMedia(newsEntity.getResults().get(0).getMultimedia());
         Assert.assertTrue(multiMediumDomains.get(0).getUrl().equals(newsEntity.getResults().get(0).getMultimedia().get(0).getUrl()));
     }
 
     @Test
-    public void validateMutliMediaSize() throws Exception {
+    public void validateMutliMediaSize() {
         NewsEntity newsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponseEmptyProperties);
         List<MultiMediumDomain> multiMediumDomains = newsFeedEntityDomainMapper.mapMedia(newsEntity.getResults().get(0).getMultimedia());
         Assert.assertEquals(multiMediumDomains.size(),4);
     }
 
     @Test
-    public void validateEmptyImageUrl() throws Exception {
+    public void validateEmptyImageUrl() {
         NewsEntity newsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponseEmptyProperties);
         List<MultiMediumDomain> multiMediumDomains = newsFeedEntityDomainMapper.mapMedia(newsEntity.getResults().get(0).getMultimedia());
         Assert.assertTrue(multiMediumDomains.get(0).getUrl().equals(""));
     }
 
     @Test
-    public void validateEmptyMultimedia() throws Exception {
+    public void validateEmptyMultimedia() {
         NewsEntity newsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponseEmptyProperties);
         List<MultiMediumDomain> multiMediumDomains = newsFeedEntityDomainMapper.mapMedia(newsEntity.getResults().get(3).getMultimedia());
         Assert.assertEquals(multiMediumDomains.size(),0);
     }
 
-//    @Test
-//    public void validateImageUrl() throws Exception {
-//        NewsEntity newsEntity = newsFeedEntityDomainMapper.parseResponse(MockResponse.newsFeedResponse);
-//        List<MultiMediumDomain> multiMediumDomains = newsFeedEntityDomainMapper.mapMedia(newsEntity.getResults().get(0).getMultimedia());
-//        Assert.assertTrue(multiMediumDomains.get(0).getUrl().equals(newsEntity.getResults().get(0).getMultimedia().get(0).getUrl()));
-//    }
 }
